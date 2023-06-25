@@ -1,12 +1,12 @@
 # Tipy
 
-Tipy é um programa CLI multi-plataforma interativo escrito em Python que permite aprender todos comandos excutáveis instalados em um computador, de forma aleatória.\
+Tipy é um programa CLI multi-plataforma interativo escrito em Python que permite aprender todos comandos excutáveis instalados em um computador, de forma aleatória. \
+O nome Tipy é a combinação das palavras Tip (dica) + Python. \
 ☑️  GNU/Linux
 ☑️  FreeBSD
 ☑️  OpenBSD
 ☑️  macOS
-☑️  Windows\
-O nome Tipy é a combinação das palavras Tip (dica) + Python.
+☑️  Windows
 
 ## Requisitos
 
