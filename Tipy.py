@@ -7,8 +7,8 @@ class ExploradorComandos:
     def __init__(self):
         self.sistema_operacional = platform.system()
 
-    def exibir_cumprimento(self):
-        cumprimentos_windows = [
+    def exibir_inicio(self):
+        inicios_windows = [
             "Aopa! Que tal aprender um novo comando do Windows hoje?",
             "Bem-vindo ao mundo dos cmdlets! Vamos explorar juntos!",
             "Prepare-se para descobrir o poder dos comandos do Windows e suas (finitas...) possibilidades.",
@@ -16,7 +16,7 @@ class ExploradorComandos:
             "Esteja preparado para liberar todo o poder dos comandos do Windows! Sua jornada no prompt de comando começa!"
         ]
 
-        cumprimentos_unix = [
+        inicios_unix = [
             "Bem-vindo, lorde das núvens baseadas em {} dos reinos compatíveis com o POSIX...".format(self.sistema_operacional),
             "Adentre o reino Linux de GNU, e libere sua habilidade no prompt de comando!",
             "Abraçe a magia do UNIX e torne-se o maestro da sua sinfonia no terminal!",
@@ -25,12 +25,12 @@ class ExploradorComandos:
         ]
 
         if self.sistema_operacional == "Windows":
-            cumprimentos = cumprimentos_windows
+            inicios = inicios_windows
         else:
-            cumprimentos = cumprimentos_unix
+            inicios = inicios_unix
 
-        cumprimento = random.choice(cumprimentos)
-        print(f"{cumprimento}\n")
+        inicio = random.choice(inicios)
+        print(f"{inicio}\n")
 
     def obter_comandos_windows(self):
         comando_listar_cmdlets = 'powershell.exe Get-Command -CommandType Cmdlet | Select-Object -ExpandProperty Name'
@@ -63,11 +63,6 @@ class ExploradorComandos:
 
             subprocess.run([comando_aleatorio, parametro_help])
 
-# Cria uma instância da classe ExploradorComandos
 explorador = ExploradorComandos()
-
-# Exibe a mensagem de cumprimento
-explorador.exibir_cumprimento()
-
-# Executa um comando aleatório com base no sistema operacional
+explorador.exibir_inicio()
 explorador.executar_comando_aleatorio()
