@@ -19,7 +19,7 @@ O nome Tipy é a combinação das palavras Tip (dica) + Python.\
 1. ``` git clone https://github.com/bitNATRON/Tipy ```
 2. cd Tipy
 
-### Uso
+## Uso
 
 1. Abra um terminal ou prompt de comando.
 2. Execute o seguinte comando para iniciar o programa:
@@ -27,7 +27,8 @@ O nome Tipy é a combinação das palavras Tip (dica) + Python.\
    ```shell
    python Tipy.py
    ```
-### Contribuição
+## Contribuição
+
 Contribuições são bem-vindas! Se você quiser contribuir para este projeto, siga as etapas abaixo:
 
 1. Faça um fork do repo.
