@@ -17,7 +17,7 @@ O nome Tipy é a combinação das palavras Tip (dica) + Python.\
 ## Baixar
 
 1. ``` git clone https://github.com/bitNATRON/Tipy ```
-2. cd Tipy
+2. ``` cd Tipy ```
 
 ## Uso
 
