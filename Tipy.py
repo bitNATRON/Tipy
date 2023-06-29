@@ -1,20 +1,22 @@
 import os
+import platform
+import subprocess
 import random
 
 class ExploradorComandos:
     def __init__(self):
-        self.sistema_operacional = os.name
+        self.sistema_operacional = platform.system()
 
-    def exibir_inicio(self):
-        inicios_windows = [
+    def exibir_cumprimento(self):
+        cumprimentos_windows = [
             "Aopa! Que tal aprender um novo comando do Windows hoje?",
             "Bem-vindo ao mundo dos cmdlets! Vamos explorar juntos!",
             "Prepare-se para descobrir o poder dos comandos do Windows e suas (finitas...) possibilidades.",
-            "Saudações, explorador do CMD! Aprenda-o e ganhe uma melhor prompt-ção na vida!",
+            "Saudações, explorador do prompt de comando! Aprenda e ganhe uma melhor prompt-ção na vida!",
             "Esteja preparado para liberar todo o poder dos comandos do Windows! Sua jornada no prompt de comando começa!"
         ]
 
-        inicios_unix = [
+        cumprimentos_unix = [
             "Bem-vindo, lorde das núvens baseadas em {} dos reinos compatíveis com o POSIX...".format(self.sistema_operacional),
             "Adentre o reino Linux de GNU, e libere sua habilidade no prompt de comando!",
             "Abraçe a magia do UNIX e torne-se o maestro da sua sinfonia no terminal!",
@@ -22,17 +24,17 @@ class ExploradorComandos:
             "Aprender sobre UNIX é saudavel! Com ele vem bastante 'Vi-tamina C++', então vá em frente!"
         ]
 
-        if self.sistema_operacional == "nt":
-            inicios = inicios_windows
+        if self.sistema_operacional == "Windows":
+            cumprimentos = cumprimentos_windows
         else:
-            inicios = inicios_unix
+            cumprimentos = cumprimentos_unix
 
-        inicio = random.choice(inicios)
-        print(f"{inicio}\n")
+        cumprimento = random.choice(cumprimentos)
+        print(f"{cumprimento}\n")
 
     def obter_comandos_windows(self):
         comando_listar_cmdlets = 'powershell.exe Get-Command -CommandType Cmdlet | Select-Object -ExpandProperty Name'
-        listagem = listagem = os.popen(comando_listar_cmdlets).read()
+        listagem = subprocess.run(comando_listar_cmdlets, capture_output=True, text=True)
         cmdlets = listagem.stdout.splitlines()
         return cmdlets
 
@@ -48,20 +50,25 @@ class ExploradorComandos:
         return comandos_executaveis
 
     def executar_comando_aleatorio(self):
-        if self.sistema_operacional == "nt":
+        if self.sistema_operacional == "Windows":
             parametro_help = "Get-Help"
             cmdlets = self.obter_comandos_windows()
             cmdlet_aleatorio = random.choice(cmdlets)
 
-            os.system(f'powershell.exe {parametro_help} {cmdlet_aleatorio}')
+            subprocess.run(['powershell.exe', parametro_help, cmdlet_aleatorio])
         else:
             parametro_help = "--help"
             comandos_executaveis = self.obter_comandos_unix()
             comando_aleatorio = random.choice(comandos_executaveis)
             print(f"NOME:{comando_aleatorio}\n")
 
-            os.system(f'{comando_aleatorio} {parametro_help}')
+            subprocess.run([comando_aleatorio, parametro_help])
 
+# Cria uma instância da classe ExploradorComandos
 explorador = ExploradorComandos()
-explorador.exibir_inicio()
+
+# Exibe a mensagem de cumprimento
+explorador.exibir_cumprimento()
+
+# Executa um comando aleatório com base no sistema operacional
 explorador.executar_comando_aleatorio()
