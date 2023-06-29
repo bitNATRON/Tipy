@@ -1,11 +1,10 @@
 import os
-import platform
 import subprocess
 import random
 
 class ExploradorComandos:
     def __init__(self):
-        self.sistema_operacional = platform.system()
+        self.sistema_operacional = os.name
 
     def exibir_inicio(self):
         inicios_windows = [
@@ -24,7 +23,7 @@ class ExploradorComandos:
             "Aprender sobre UNIX é saudavel! Com ele vem bastante 'Vi-tamina C++', então vá em frente!"
         ]
 
-        if self.sistema_operacional == "Windows":
+        if self.sistema_operacional == "nt":
             inicios = inicios_windows
         else:
             inicios = inicios_unix
@@ -41,15 +40,16 @@ class ExploradorComandos:
     def obter_comandos_unix(self):
         path_dirs = os.environ["PATH"].split(":")
         comandos_executaveis = []
-        for dir in path_dirs:
-            for cmd in os.listdir(dir):
-                caminho_completo_cmd = os.path.join(dir, cmd)
-                if os.access(caminho_completo_cmd, os.X_OK):
-                    comandos_executaveis.append(caminho_completo_cmd)
+        for directory in path_dirs:
+            if os.path.isdir(directory):  # Importante: Verificação
+                for cmd in os.listdir(directory):
+                    caminho_completo_cmd = os.path.join(directory, cmd)
+                    if os.access(caminho_completo_cmd, os.X_OK):
+                        comandos_executaveis.append(caminho_completo_cmd)
         return comandos_executaveis
 
     def executar_comando_aleatorio(self):
-        if self.sistema_operacional == "Windows":
+        if self.sistema_operacional == "nt":
             parametro_help = "Get-Help"
             cmdlets = self.obter_comandos_windows()
             cmdlet_aleatorio = random.choice(cmdlets)
