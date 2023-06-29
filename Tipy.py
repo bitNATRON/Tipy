@@ -1,5 +1,4 @@
 import os
-import subprocess
 import random
 
 class ExploradorComandos:
@@ -11,7 +10,7 @@ class ExploradorComandos:
             "Aopa! Que tal aprender um novo comando do Windows hoje?",
             "Bem-vindo ao mundo dos cmdlets! Vamos explorar juntos!",
             "Prepare-se para descobrir o poder dos comandos do Windows e suas (finitas...) possibilidades.",
-            "Saudações, explorador do prompt de comando! Aprenda e ganhe uma melhor prompt-ção na vida!",
+            "Saudações, explorador do CMD! Aprenda-o e ganhe uma melhor prompt-ção na vida!",
             "Esteja preparado para liberar todo o poder dos comandos do Windows! Sua jornada no prompt de comando começa!"
         ]
 
@@ -33,7 +32,7 @@ class ExploradorComandos:
 
     def obter_comandos_windows(self):
         comando_listar_cmdlets = 'powershell.exe Get-Command -CommandType Cmdlet | Select-Object -ExpandProperty Name'
-        listagem = subprocess.run(comando_listar_cmdlets, capture_output=True, text=True)
+        listagem = listagem = os.popen(comando_listar_cmdlets).read()
         cmdlets = listagem.stdout.splitlines()
         return cmdlets
 
@@ -41,11 +40,11 @@ class ExploradorComandos:
         path_dirs = os.environ["PATH"].split(":")
         comandos_executaveis = []
         for directory in path_dirs:
-            if os.path.isdir(directory):  # Importante: Verificação
+            if os.path.isdir(directory):  # IMPORTANTE: Verificação
                 for cmd in os.listdir(directory):
                     caminho_completo_cmd = os.path.join(directory, cmd)
                     if os.access(caminho_completo_cmd, os.X_OK):
-                        comandos_executaveis.append(caminho_completo_cmd)
+                    	comandos_executaveis.append(caminho_completo_cmd)
         return comandos_executaveis
 
     def executar_comando_aleatorio(self):
@@ -54,14 +53,14 @@ class ExploradorComandos:
             cmdlets = self.obter_comandos_windows()
             cmdlet_aleatorio = random.choice(cmdlets)
 
-            subprocess.run(['powershell.exe', parametro_help, cmdlet_aleatorio])
+            os.system(f'powershell.exe {parametro_help} {cmdlet_aleatorio}')
         else:
             parametro_help = "--help"
             comandos_executaveis = self.obter_comandos_unix()
             comando_aleatorio = random.choice(comandos_executaveis)
             print(f"NOME:{comando_aleatorio}\n")
 
-            subprocess.run([comando_aleatorio, parametro_help])
+            os.system(f'{comando_aleatorio} {parametro_help}')
 
 explorador = ExploradorComandos()
 explorador.exibir_inicio()
