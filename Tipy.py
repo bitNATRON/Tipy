@@ -46,7 +46,7 @@ class ExploradorComandos:
                 for cmd in os.listdir(directory):
                     caminho_completo_cmd = os.path.join(directory, cmd)
                     if os.access(caminho_completo_cmd, os.X_OK):
-                    	comandos_executaveis.append(caminho_completo_cmd)
+                        comandos_executaveis.append(caminho_completo_cmd)
         return comandos_executaveis
 
     def executar_comando_aleatorio(self):
